@@ -17,7 +17,7 @@
 
 &MISC BNDF_DEFAULT=F,
       SIMULATION_MODE='VLES',
-      RESTART=F /
+      RESTART=T /
 
 # Rule of thumb PATH_LENGTH: 4V/A
 &RADI PATH_LENGTH             = 0.1,

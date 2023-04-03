@@ -1,4 +1,4 @@
-&HEAD CHID='MaCFP_Burner_10', TITLE='Parallel Panel Test, PMMA, Propane, 60 kW' /
+&HEAD CHID='MaCFP_Burner_11', TITLE='Parallel Panel Test, PMMA, Propane, 60 kW' /
 
 # Simulation setup to determine the heat flux
 # from the burner to the empty panel, based on the
@@ -6,9 +6,55 @@
 # https://github.com/MaCFP/macfp-db/tree/master/Fire_Growth/NIST_Parallel_Panel/Documentation
 
 # Multiples of 10 cm, to maintain easy connection to cone calorimeter.
-&MESH ID='Domain',
+ MESH ID='BaseDomain',
       IJK=160,240,300,
       XB=-0.39,0.41,-0.60,0.60,-0.30,1.20, /
+
+
+&MESH ID  ='MeshPanel.001'
+      IJK = 30,60,150,
+      XB  = -0.15,0.15,-0.30,0.30,-0.30,1.20, /
+
+&MESH ID  ='MultiMesh.001'
+      IJK = 30,60,150,
+      XB  = -0.45,-0.15,-0.30,0.30,-0.30,1.20, /
+
+&MESH ID  ='MultiMesh.002'
+      IJK = 30,60,150,
+      XB  = 0.15,0.45,-0.30,0.30,-0.30,1.20, /
+
+&MESH ID  ='MultiMesh.003'
+      IJK = 90,30,150,
+      XB  = -0.45,0.45,-0.60,-0.30,-0.30,1.20, /
+
+&MESH ID  ='MultiMesh.004'
+      IJK = 90,30,150,
+      XB  = -0.45,0.45,0.30,0.60,-0.30,1.20, /
+
+
+
+
+ MESH ID  ='MeshPanel.002'
+      IJK = 30,60,150,
+      XB  = -0.15,0.15,-0.30,0.30,1.20,2.70, /
+
+ MESH ID  ='MultiMesh.005'
+      IJK = 30,60,150,
+      XB  = -0.45,-0.15,-0.30,0.30,1.20,2.70, /
+
+ MESH ID  ='MultiMesh.006'
+      IJK = 30,60,150,
+      XB  = 0.15,0.45,-0.30,0.30,1.20,2.70, /
+
+ MESH ID  ='MultiMesh.007'
+      IJK = 90,30,150,
+      XB  = -0.45,0.45,-0.60,-0.30,1.20,2.70, /
+
+ MESH ID  ='MultiMesh.008'
+      IJK = 90,30,150,
+      XB  = -0.45,0.45,0.30,0.60,1.20,2.70, /
+
+
 
 &TIME T_END=180.0 /
 
@@ -16,7 +62,7 @@
  DUMP DT_SLCF=0.2, DT_BNDF=1., DT_DEVC=15., DT_HRR=15., SIG_FIGS=4, SIG_FIGS_EXP=2 /
 
 &MISC BNDF_DEFAULT=F,
-      SIMULATION_MODE='LES',
+      SIMULATION_MODE='VLES',
       RESTART=T /
 
 # Rule of thumb PATH_LENGTH: 4V/A
@@ -333,6 +379,31 @@ BNDF_FACE(-3),
 
 
 &SLCF PBY=0.00 QUANTITY='TEMPERATURE', VECTOR=.TRUE. /
+
+&SLCF ID            = 'HorizontalTemp_01',
+      VECTOR        = T,
+      QUANTITY      ='TEMPERATURE',
+      CELL_CENTERED = T,
+      PBZ           = 0.06 /
+
+&SLCF ID            = 'HorizontalTemp_02',
+      VECTOR        = T,
+      QUANTITY      ='TEMPERATURE',
+      CELL_CENTERED = T,
+      PBZ           = 0.16 /
+
+
+&SLCF ID            = 'HorizontalVelo_01',
+      QUANTITY      ='VELOCITY',
+      CELL_CENTERED = T,
+      PBZ           = 0.06 /
+
+&SLCF ID            = 'HorizontalVelo_02',
+      QUANTITY      ='VELOCITY',
+      CELL_CENTERED = T,
+      PBZ           = 0.16 /
+
+
 
 &SLCF PBX=0.00 QUANTITY='INTEGRATED INTENSITY' /
 &SLCF PBY=0.00 QUANTITY='INTEGRATED INTENSITY' /
