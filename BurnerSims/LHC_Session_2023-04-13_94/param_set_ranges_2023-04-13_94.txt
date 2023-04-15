@@ -1,0 +1,10 @@
+Parameter and their ranges:
+PATH_LENGTH: 0.1, 1,simple,None
+ANGLE_INCREMENT: 1, 5,simple,None
+NUMBER_RADIATION_ANGLES: 100, 1000,LHS,None
+HRRPUA: 300, 600,LHS,None
+SOOT_YIELD: 0.015, 0.03,LHS,None
+RADIATIVE_FRACTION: 0.2, 0.4,LHS,None
+TMPA: 10, 30,LHS,None
+EMISSIVITY_Burner: 0.8, 0.99,LHS,random
+EMISSIVITY_Panel: 0.8, 0.99,LHS,random

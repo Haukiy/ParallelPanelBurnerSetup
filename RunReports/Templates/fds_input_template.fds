@@ -42,7 +42,7 @@
 &MISC BNDF_DEFAULT=F,
       SIMULATION_MODE='VLES',
       TMPA=20
-      RESTART=T /
+      RESTART=F /
 
 #PL distance digonal max 0.67082
 &RADI TIME_STEP_INCREMENT     = 3
